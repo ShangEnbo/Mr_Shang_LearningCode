@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script crossorigin="anonymous" integrity="sha512-MNW6IbpNuZZ2VH9ngFhzh6cUt8L/0rSVa60F8L22K1H72ro4Ki3M/816eSDLnhICu7vwH/+/yb8oB3BtBLhMsA==" src="https://lib.baomitu.com/axios/0.26.1/axios.js"></script>
+</head>
+<body>
+  test
+  <script>
+    (async function() {
+      axios.defaults.withCredentials = true
+      axios.defaults.baseURL = 'http://localhost:30002'
+      // axios.default.header.common['X-token'] = 'aaaa'
+
+      let res = await axios.get('/users', {
+        name: '123213'
+      })
+      console.log(res.data)
+    })()
+  </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>absolute_margin</title>
+  <style>
+    .box {
+      position: relative;
+    }
+    .left {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: red;
+      width: 200px;
+      height: 200px;
+    }
+    .right {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: blue;
+      width: 200px;
+      height: 200px;
+    }
+    .center {
+      margin: 0 200px;
+      background-color: pink;
+      height: 200px;
+    }
+
+  </style>
+</head>
+<body>
+  <h1>absolute_margin</h1>
+  <div class="box">
+    <div class="left">left</div>
+    <div class="right">right</div>
+    <div class="center">center</div>
+  </div>
+</body>
+</html>

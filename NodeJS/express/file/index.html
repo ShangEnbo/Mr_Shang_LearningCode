@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <style>
+    
+  </style>
+</head>
+<body>
+  3000端口
+  <ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+  </ul>
+  <input type="text" class="message">
+  <input type="button" onclick="sendMessage()" value='发送'>
+  <input type="button" onclick="closeMessage()" value='关闭连接'>
+  <script>
+    // (async function() {
+    //   axios.defaults.withCredentials = true  // true 允许携带Cookie false 不携带
+    //   axios.defaults.baseURL = 'http://localhost:30000'
+    //   axios.defaults.headers.common['X-Token'] = '8888'
+
+    //   const res = await axios.get('/users', {
+    //     name: 11
+    //   })
+    //   console.log(res.data)
+    // })()
+    let ws = new WebSocket('ws://localhost:8181')
+    ws.onopen = function(e) {
+      console.log(('开始连接'));
+      ws.send('la')
+      console.log('已发送la');
+    }
+    function sendMessage() {
+      let message = document.querySelector('.message')
+      ws.send(message.value)
+    }
+    ws.onmessage = function(e) {
+      console.log(e.data)
+    }
+    function closeMessage() {
+      ws.close()
+    }
+  </script>
+</body>
+</html>
