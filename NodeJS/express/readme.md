@@ -170,3 +170,32 @@ JSONP
 2. 得到要通过JSONP形式发送给客户端的数据
 3. 根据前两步得到的数据，拼接出一个函数调用的字符串
 4. 把上一步拼接得到的字符串，响应给客户端的<script>标签进行解析执行
+
+
+# MySQL
+
+1. 安装MySQL
+2. 安装MySQLWorkbench 可视化数据库管理工具
+3. 创建数据库
+4. 创建表
+5. 表内字段
+
+
+## 表内字段
+
+DataType数据类型
+
+int 整数
+varchar(len)  字符串
+tinyint(1)  布尔值  0/1
+
+字符的特殊标识
+PK  主键
+NN  非空
+UQ  唯一
+UN  
+Binary
+ZF
+AI  值自动增长
+Generated
+Default/Expression  默认值
