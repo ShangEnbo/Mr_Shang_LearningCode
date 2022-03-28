@@ -5,6 +5,9 @@
   "license": "MIT",
   "dependencies": {
     "cpu-stat": "^2.0.1",
+    "express-jwt": "^6.1.1",
+    "express-session": "^1.17.2",
+    "jsonwebtoken": "^8.5.1",
     "socket.io": "^4.4.1",
     "ws": "^8.5.0"
   }

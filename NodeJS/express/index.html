@@ -12,6 +12,9 @@
   <input id="btnPost" type="button" value="POST">
   <input id="btnDel" type="button" value="DELETE">
   <input id="btnJsonp" type="button" value="JSONP">
+  <input id="btnlogin" type="button" value="login">
+  <input id="btnname" type="button" value="getname">
+  <input id="btnlogout" type="button" value="logout">
 
   <script>
     $('#btnJsonp').on('click', function() {
@@ -49,6 +52,40 @@
       $.ajax({
         type: 'DELETE',
         url: 'http://localhost:3000/api/delete',
+        success: function(res) {
+          console.log(res);
+        }
+      })
+    })
+
+    $('#btnlogin').on('click', function() {
+      $.ajax({
+        type: 'POST',
+        url: 'http://localhost:3011/api/login',
+        data: { username: 'admin', password: '000000' },
+        success: function(res) {
+          console.log(res);
+          // 要进行session处理，把内容存储在sessionStorage
+        }
+      })
+    })
+
+    $('#btnname').on('click', function() {
+      $.ajax({
+        type: 'GET',
+        url: 'http://localhost:3011/api/username',
+        // data: { name: 'zs', age: 20 },
+        success: function(res) {
+          console.log(res);
+        }
+      })
+    })
+
+    $('#btnlogout').on('click', function() {
+      $.ajax({
+        type: 'POST',
+        url: 'http://localhost:3011/api/logout',
+        // data: { name: 'zs', age: 20 },
         success: function(res) {
           console.log(res);
         }
