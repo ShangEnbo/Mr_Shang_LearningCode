@@ -1,5 +1,8 @@
 const db = require('../db/index')
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+
+const config = require('../config')
 
 // 注册新用户
 exports.register =  (req, res) => {
@@ -29,5 +32,27 @@ exports.register =  (req, res) => {
 
 // 登录
 exports.login =  (req, res) => {
-  res.send('login ok')
+  const userinfo = req.body
+
+  const sql = 'select * from ev_users where username = ?'
+  db.query(sql, userinfo.username, (err, results) => {
+    if(err) return res.cc(err)
+
+    if(results.length !== 1) return res.cc('用户名或密码不正确')
+    
+    const compare = bcrypt.compareSync(userinfo.password, results[0].password)
+
+    if(!compare) res.cc('用户名或密码不正确')
+
+    const user = { ...results[0], password: '', userpic: '' }
+
+    const tokenStr = jwt.sign(user, config.jwtSecretKey, { expiresIn: config.expiresIn })
+
+    res.send({
+      status: 200,
+      message: '登录成功',
+      token: `Bearer ${tokenStr}`
+    })
+
+  })
 }
