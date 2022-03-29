@@ -11,7 +11,7 @@ exports.register =  (req, res) => {
   const sql = 'select * from ev_users where username=?'
   db.query(sql, [userinfo.username], (err, results) => {
     if(err) return res.cc(err)
-
+ 
     if(results.length > 0) return res.cc('用户名被占用') 
 
     userinfo.password = bcrypt.hashSync(userinfo.password, 10)
