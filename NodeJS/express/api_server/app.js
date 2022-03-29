@@ -26,17 +26,12 @@ app.use((req, res, next) => {
   next()
 })
 
-
 // token认证
 app.use(expressJWT({ secret: config.jwtSecretKey }).unless({ path: [/^\/api\//]}))
-
 
 // 引入路由
 app.use('/api', userRouter)
 app.use('/my', userinfoRouter)
-
-
-
 
 // 错误级中间件
 app.use((err, req, res, next) => {
@@ -48,7 +43,6 @@ app.use((err, req, res, next) => {
   res.cc(err)
 
 })
-
 
 app.listen(3000, () => {
   console.log('api server run start');
