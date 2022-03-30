@@ -4,6 +4,7 @@ const joi = require('@hapi/joi')
 const expressJWT = require('express-jwt')
 const config = require('./config.js')
 const userRouter = require('./router/user')
+const dataRouter = require('./router/data')
 const userinfoRouter = require('./router/userinfo')
 
 const app = express()
@@ -31,6 +32,7 @@ app.use(expressJWT({ secret: config.jwtSecretKey }).unless({ path: [/^\/api\//]}
 
 // 引入路由
 app.use('/api', userRouter)
+app.use('/api', dataRouter)
 app.use('/my', userinfoRouter)
 
 // 错误级中间件
@@ -39,6 +41,7 @@ app.use((err, req, res, next) => {
   if(err instanceof joi.ValidationError) return res.cc(err)
   // JWT身份认证失败
   if(err.name === 'UnauthorizedError') return res.cc('身份认证失败')
+  console.log('未知错误');
   // 未知错误
   res.cc(err)
 

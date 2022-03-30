@@ -11,7 +11,7 @@ exports.register =  (req, res) => {
   if(!userinfo.username || !userinfo.password) return res.cc('用户名或密码不合法')
 
   // 用户名重复查询操作
-  const sql = 'select * from ev_users where username=?'
+  const sql = 'select * from users where username=?'
   db.query(sql, [userinfo.username], (err, results) => {
     if(err) return res.cc(err)
  
@@ -19,7 +19,7 @@ exports.register =  (req, res) => {
 
     userinfo.password = bcrypt.hashSync(userinfo.password, 10)
 
-    const sql = 'insert into ev_users set ?'
+    const sql = 'insert into users set ?'
     db.query(sql, userinfo, (err, results) => {
       if(err) return res.cc(err)
 
@@ -33,8 +33,8 @@ exports.register =  (req, res) => {
 // 登录
 exports.login =  (req, res) => {
   const userinfo = req.body
-
-  const sql = 'select * from ev_users where username = ?'
+  console.log(userinfo);
+  const sql = 'select * from users where username = ?'
   db.query(sql, userinfo.username, (err, results) => {
     if(err) return res.cc(err)
 
@@ -42,16 +42,17 @@ exports.login =  (req, res) => {
     
     const compare = bcrypt.compareSync(userinfo.password, results[0].password)
 
-    if(!compare) res.cc('用户名或密码不正确')
+    if(!compare) return res.cc('用户名或密码不正确')
 
     const user = { ...results[0], password: '', userpic: '' }
 
     const tokenStr = jwt.sign(user, config.jwtSecretKey, { expiresIn: config.expiresIn })
 
+    console.log(tokenStr);
     res.send({
       status: 200,
       message: '登录成功',
-      token: `Bearer ${tokenStr}`
+      token: tokenStr
     })
 
   })
