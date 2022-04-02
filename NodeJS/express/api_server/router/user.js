@@ -10,6 +10,7 @@ const { req_login_schema } = require('../schema/user')
 
 router.post('/register', expressJoi(req_login_schema), user_handler.register)
 router.post('/login', expressJoi(req_login_schema), user_handler.login)
+router.post('/logout', user_handler.logout)
 
 
 

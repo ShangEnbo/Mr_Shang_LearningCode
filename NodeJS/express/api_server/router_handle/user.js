@@ -57,3 +57,8 @@ exports.login =  (req, res) => {
 
   })
 }
+
+// 退出
+exports.logout =  (req, res) => {
+  res.cc('退出成功', 200)
+}
